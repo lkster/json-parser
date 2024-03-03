@@ -4,41 +4,16 @@ import 'package:test/test.dart';
 
 void main() {
   test('should lex all tokens', () {
-    var lexer = Lexer('123 345', [NumberLexerExtension()]);
+    var lexer = Lexer([NumberLexerExtension()]).lex('123 345').iterator;
 
-    expect(lexer.next(), NumberLiteralToken('123'));
-    expect(lexer.next(), NumberLiteralToken('345'));
-  });
-
-  test('should have isDone flag set properly', () {
-    var lexer = Lexer('123 345 2', [NumberLexerExtension()]);
-
-    expect(lexer.isDone, false);
-
-    lexer.next();
-
-    expect(lexer.isDone, false);
-
-    lexer.next();
-
-    expect(lexer.isDone, false);
-
-    lexer.next();
-
-    expect(lexer.isDone, true);
-  });
-
-  test('should throw if calling next() after lexer is done', () {
-    var lexer = Lexer('123', [NumberLexerExtension()]);
-    lexer.next();
-
-    expect(() => lexer.next(), throwsA(isA<AssertionError>()));
+    expect((lexer..moveNext()).current, NumberLiteralToken('123'));
+    expect((lexer..moveNext()).current, NumberLiteralToken('345'));
+    expect((lexer..moveNext()).current, null);
   });
 
   test('should throw if char is not handled by any of extensions', () {
-    var lexer = Lexer('.', [NumberLexerExtension()]);
+    var lexer = Lexer([NumberLexerExtension()]).lex('.').iterator;
 
-    expect(() => lexer.next(), throwsA('unexpected char .'));
-
+    expect(() => (lexer..moveNext()).current, throwsA('unexpected char .'));
   });
 }

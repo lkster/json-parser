@@ -4,24 +4,27 @@ import 'lexer_extension.dart';
 import 'scanner.dart';
 
 class Lexer {
-  final Scanner _scanner;
   final List<LexerExtension> extensions;
 
-  Lexer(String source, this.extensions) : _scanner = Scanner(source);
+  Lexer(this.extensions);
 
-  bool get isDone => _scanner.isDone;
+  Iterable<Token?> lex(String source) sync* {
+    final scanner = Scanner(source);
 
-  Token next() {
-    assert(!isDone, 'end of source');
+    while (!scanner.isDone) {
+      yield _next(scanner);
+    }
+  }
 
+  Token _next(Scanner scanner) {
     for (final extension in extensions) {
-      final token = extension.lex(_scanner);
+      final token = extension.lex(scanner);
 
       if (token != null) {
         return token;
       }
     }
 
-    throw 'unexpected char ${String.fromCharCode(_scanner.peekChar() ?? 0)}';
+    throw 'unexpected char ${String.fromCharCode(scanner.peekChar() ?? 0)}';
   }
 }
