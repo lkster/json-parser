@@ -15,10 +15,14 @@ enum Delimiter {
   const Delimiter(this.symbol);
 
   final String symbol;
+
+  @override
+  String toString() => symbol;
 }
 
 
 final class DelimiterToken extends Token {
+  @override
   final Delimiter value;
 
   const DelimiterToken(this.value);

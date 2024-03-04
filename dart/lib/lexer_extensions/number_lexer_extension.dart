@@ -5,6 +5,7 @@ import 'package:json_parser/core/utils/char_code.dart';
 import 'package:json_parser/core/utils/int_extension.dart';
 
 final class NumberLiteralToken extends Token {
+  @override
   final String value;
 
   const NumberLiteralToken(this.value);
