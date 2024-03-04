@@ -4,14 +4,28 @@ import 'package:test/test.dart';
 
 void main() {
 
-  test('should return NumberLiteralToken if number is lexed', () {
+  test('should return NumberLiteralToken if int is lexed', () {
     var scanner = Scanner('123asd');
 
     expect(NumberLexerExtension().lex(scanner), NumberLiteralToken('123'));
 
-    scanner = Scanner('   \n\t233 test');
+    scanner = Scanner('233 test');
 
     expect(NumberLexerExtension().lex(scanner), NumberLiteralToken('233'));
+
+    scanner = Scanner('12..32');
+
+    expect(NumberLexerExtension().lex(scanner), NumberLiteralToken('12'));
+  });
+
+  test('should return NumberLiteralToken if double is lexed', () {
+    var scanner = Scanner('12.34 asd');
+
+    expect(NumberLexerExtension().lex(scanner), NumberLiteralToken('12.34'));
+
+    scanner = Scanner('25.34.23');
+
+    expect(NumberLexerExtension().lex(scanner), NumberLiteralToken('25.34'));
   });
 
   test('should return null if number is not lexed', () {

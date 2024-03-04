@@ -13,19 +13,41 @@ final class NumberLiteralToken extends Token {
   int get hashCode => Object.hash(runtimeType, value);
 
   @override
-  bool operator ==(Object other) => other is NumberLiteralToken && value == other.value;
+  bool operator ==(Object other) =>
+      other is NumberLiteralToken && value == other.value;
+
+  @override
+  String toString() {
+    return value;
+  }
 }
 
-final class NumberLexerExtension extends LexerExtension {
+final class NumberLexerExtension implements LexerExtension {
   @override
   Token? lex(Scanner scanner) {
-    String value = '';
+    String value = _lexDigits(scanner);
 
+    if (value.isEmpty) {
+      return null;
+    }
 
-    while (scanner.peekChar().inRange(CharCode.num0.code, CharCode.num9.code)) {
+    if (scanner.peekChar() == CharCode.dot.code && _isDigit(scanner.peekChar(1))) {
+      scanner.readChar();
+      value += '.${_lexDigits(scanner)}';
+    }
+
+    return NumberLiteralToken(value);
+  }
+
+  String _lexDigits(Scanner scanner) {
+    var value = '';
+
+    while (_isDigit(scanner.peekChar())) {
       value += String.fromCharCode(scanner.readChar());
     }
 
-    return value.isNotEmpty ? NumberLiteralToken(value) : null;
+    return value;
   }
+
+  bool _isDigit(int? charCode) => charCode?.inRange(CharCode.num0.code, CharCode.num9.code) ?? false;
 }

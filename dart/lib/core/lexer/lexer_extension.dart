@@ -1,6 +1,6 @@
 import 'scanner.dart';
 import 'token.dart';
 
-abstract class LexerExtension {
+abstract interface class LexerExtension {
   Token? lex(Scanner scanner);
 }
