@@ -1,31 +1,26 @@
-/// It could be done with simple map to have easier access (`CharCode.space` instead of `CharCode.space.code`)
-/// or even with just exported consts like `charcode` package has (`$space`) but I wanted to group it in one entity and
-/// use Dart's enum features
-enum CharCode {
-  space(0x20),
-  tab(0x09),
-  lineFeed(0x0A),
-  carriageReturn(0x0D),
-  dot(0x2E),
-  openBracket(0x5B),
-  closeBracket(0x5D),
-  openBrace(0x7B),
-  closeBrace(0x7D),
-  doubleQuote(0x22),
-  comma(0x2C),
-  colon(0x3A),
-  num0(0x30),
-  num1(0x31),
-  num2(0x32),
-  num3(0x33),
-  num4(0x34),
-  num5(0x35),
-  num6(0x36),
-  num7(0x37),
-  num8(0x38),
-  num9(0x39);
-
-  const CharCode(this.code);
-
-  final int code;
-}
+const $space = 0x20;
+const $tab = 0x09;
+const $lineFeed = 0x0a;
+const $carriageReturn = 0x0d;
+const $dot = 0x2e;
+const $openBracket = 0x5b;
+const $closeBracket = 0x5d;
+const $openBrace = 0x7b;
+const $closeBrace = 0x7d;
+const $doubleQuote = 0x22;
+const $backslash = 0x5c;
+const $comma = 0x2c;
+const $colon = 0x3a;
+const $num0 = 0x30;
+const $num1 = 0x31;
+const $num2 = 0x32;
+const $num3 = 0x33;
+const $num4 = 0x34;
+const $num5 = 0x35;
+const $num6 = 0x36;
+const $num7 = 0x37;
+const $num8 = 0x38;
+const $num9 = 0x39;
+const $lowerN = 0x6e;
+const $lowerR = 0x72;
+const $lowerT = 0x74;

@@ -6,7 +6,6 @@ import 'package:json_parser/core/utils/char_code.dart';
 enum Delimiter {
   comma(','),
   colon(':'),
-  doubleQuote('"'),
   openBracket('['),
   closeBracket(']'),
   openBrace('{'),
@@ -41,13 +40,12 @@ final class DelimiterToken extends Token {
 
 final class DelimiterLexerExtension implements LexerExtension {
   final _delimiters = {
-    CharCode.openBrace.code: Delimiter.openBrace,
-    CharCode.closeBrace.code: Delimiter.closeBrace,
-    CharCode.openBracket.code: Delimiter.openBracket,
-    CharCode.closeBracket.code: Delimiter.closeBracket,
-    CharCode.colon.code: Delimiter.colon,
-    CharCode.comma.code: Delimiter.comma,
-    CharCode.doubleQuote.code: Delimiter.doubleQuote,
+    $openBrace: Delimiter.openBrace,
+    $closeBrace: Delimiter.closeBrace,
+    $openBracket: Delimiter.openBracket,
+    $closeBracket: Delimiter.closeBracket,
+    $colon: Delimiter.colon,
+    $comma: Delimiter.comma,
   };
 
   @override

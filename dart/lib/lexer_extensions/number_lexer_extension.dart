@@ -32,7 +32,7 @@ final class NumberLexerExtension implements LexerExtension {
       return null;
     }
 
-    if (scanner.peekChar() == CharCode.dot.code && _isDigit(scanner.peekChar(1))) {
+    if (scanner.peekChar() == $dot && _isDigit(scanner.peekChar(1))) {
       scanner.readChar();
       value += '.${_lexDigits(scanner)}';
     }
@@ -50,5 +50,5 @@ final class NumberLexerExtension implements LexerExtension {
     return value;
   }
 
-  bool _isDigit(int? charCode) => charCode?.inRange(CharCode.num0.code, CharCode.num9.code) ?? false;
+  bool _isDigit(int? charCode) => charCode?.inRange($num0, $num9) ?? false;
 }

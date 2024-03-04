@@ -1,12 +1,12 @@
 import 'package:json_parser/core/utils/char_code.dart';
 
 extension IntChar on int? {
-  bool get isSpace => this == CharCode.space.code;
+  bool get isSpace => this == $space;
 
-  bool get isTab => this == CharCode.tab.code;
+  bool get isTab => this == $tab;
 
   bool get isNewLine =>
-      [CharCode.lineFeed.code, CharCode.carriageReturn.code].contains(this);
+      [$lineFeed, $carriageReturn].contains(this);
 
   bool get isWhitespace => isSpace || isTab || isNewLine;
 
