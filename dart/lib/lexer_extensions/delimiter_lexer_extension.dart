@@ -19,7 +19,6 @@ enum Delimiter {
   String toString() => symbol;
 }
 
-
 final class DelimiterToken extends Token {
   @override
   final Delimiter value;
@@ -30,7 +29,8 @@ final class DelimiterToken extends Token {
   int get hashCode => Object.hash(runtimeType, value);
 
   @override
-  bool operator ==(Object other) => other is DelimiterToken && value == other.value;
+  bool operator ==(Object other) =>
+      other is DelimiterToken && value == other.value;
 
   @override
   String toString() {
@@ -58,5 +58,4 @@ final class DelimiterLexerExtension implements LexerExtension {
 
     return DelimiterToken(delimiter);
   }
-
 }

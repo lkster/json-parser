@@ -5,8 +5,7 @@ extension IntChar on int? {
 
   bool get isTab => this == $tab;
 
-  bool get isNewLine =>
-      [$lineFeed, $carriageReturn].contains(this);
+  bool get isNewLine => [$lineFeed, $carriageReturn].contains(this);
 
   bool get isWhitespace => isSpace || isTab || isNewLine;
 

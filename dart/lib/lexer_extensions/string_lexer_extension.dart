@@ -26,8 +26,9 @@ final class StringLiteralToken extends Token {
 /// This can be handled in two ways:
 /// 1. Make DelimiterToken of double quote and lex every word as some token (let's say LiteralToken)
 ///    pros:
-///      - Boolean lexing would be able to fall into that.
-///      - Hence there would be one extension less - LiteralLexerExtension and DelimiterLexerExtension
+///      - Boolean and null lexing would be able to fall into that.
+///      - Hence there would be at least two extensions less - LiteralLexerExtension and DelimiterLexerExtension while
+///        getting rid of BooleanLexerExtension and NullLexerExtension
 ///    cons:
 ///      - More tokens in iterator and more characters to handle
 ///        Every word should still be separated by delimiters. Hence instead of just consuming characters until double

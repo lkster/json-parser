@@ -3,7 +3,6 @@ import 'package:json_parser/lexer_extensions/number_lexer_extension.dart';
 import 'package:test/test.dart';
 
 void main() {
-
   test('should return NumberLiteralToken if int is lexed', () {
     var scanner = Scanner('123asd');
 

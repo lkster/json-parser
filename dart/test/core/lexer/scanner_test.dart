@@ -101,14 +101,20 @@ void main() {
   });
 
   group('expectString()', () {
-    test("should return true if string matches on current cursor's position", () {
+    test("should return true if string matches on current cursor's position",
+        () {
       var scanner = Scanner('matchtestlol');
 
       expect(scanner.expectString('match'), true);
 
       scanner = Scanner('matchtestlol');
 
-      scanner..readChar()..readChar()..readChar()..readChar()..readChar();
+      scanner
+        ..readChar()
+        ..readChar()
+        ..readChar()
+        ..readChar()
+        ..readChar();
 
       expect(scanner.expectString('test'), true);
     });
@@ -122,7 +128,12 @@ void main() {
 
       scanner = Scanner('matchtestlol');
 
-      scanner..readChar()..readChar()..readChar()..readChar()..readChar();
+      scanner
+        ..readChar()
+        ..readChar()
+        ..readChar()
+        ..readChar()
+        ..readChar();
 
       scanner.expectString('test');
 

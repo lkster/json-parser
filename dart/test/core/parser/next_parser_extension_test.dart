@@ -41,7 +41,9 @@ void main() {
     expect(next.index, 3);
   });
 
-  test('should reset index in returned NextParserExtension when startOver is called', () {
+  test(
+      'should reset index in returned NextParserExtension when startOver is called',
+      () {
     late NextParserExtension next;
 
     next = NextParserExtension(onNext: (index, nextFunc) {
