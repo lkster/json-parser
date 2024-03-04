@@ -24,6 +24,17 @@ class Scanner {
     return _source.codeUnitAt(index);
   }
 
+  /// if [str] matches, moves cursor by appropriate amount of chars and returns true. False otherwise
+  bool expectString(String str) {
+    if (!_source.startsWith(str, _position)) {
+      return false;
+    }
+
+    _position += str.length;
+
+    return true;
+  }
+
   void omitWhitespace() {
     while (!isDone && peekChar().isWhitespace) {
       _position++;

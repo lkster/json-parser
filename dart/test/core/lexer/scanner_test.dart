@@ -100,6 +100,51 @@ void main() {
     });
   });
 
+  group('expectString()', () {
+    test("should return true if string matches on current cursor's position", () {
+      var scanner = Scanner('matchtestlol');
+
+      expect(scanner.expectString('match'), true);
+
+      scanner = Scanner('matchtestlol');
+
+      scanner..readChar()..readChar()..readChar()..readChar()..readChar();
+
+      expect(scanner.expectString('test'), true);
+    });
+
+    test("should properly set cursor's position", () {
+      var scanner = Scanner('matchtestlol');
+
+      scanner.expectString('match');
+
+      expect(scanner.position, 5);
+
+      scanner = Scanner('matchtestlol');
+
+      scanner..readChar()..readChar()..readChar()..readChar()..readChar();
+
+      scanner.expectString('test');
+
+      expect(scanner.position, 9);
+    });
+
+    test('should return false if provided string does not match', () {
+      var scanner = Scanner('matchtestlol');
+
+      expect(scanner.expectString('watch'), false);
+      expect(scanner.expectString('atch'), false);
+    });
+
+    test("should not move cursor forward if there was no match", () {
+      var scanner = Scanner('matchtestlol');
+
+      scanner.expectString('atch');
+
+      expect(scanner.position, 0);
+    });
+  });
+
   test('omitWhitespace() should omit all whitespace characters', () {
     final scanner = Scanner('   abc  \n\t\t123');
 

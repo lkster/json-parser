@@ -6,4 +6,9 @@ void main() {
     expect(parseJson('1234'), 1234);
     expect(parseJson('12.54'), 12.54);
   });
+
+  test('should properly parse boolean', () {
+    expect(parseJson('true'), true);
+    expect(parseJson('false'), false);
+  });
 }
