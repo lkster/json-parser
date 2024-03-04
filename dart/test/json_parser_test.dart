@@ -11,4 +11,9 @@ void main() {
     expect(parseJson('true'), true);
     expect(parseJson('false'), false);
   });
+
+  test('should properly parse string', () {
+    expect(parseJson('"some string"'), 'some string');
+    expect(parseJson('"some \\n \\" \\t\\tstring"'), 'some \n " \t\tstring');
+  });
 }

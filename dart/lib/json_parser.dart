@@ -1,5 +1,7 @@
 import 'package:json_parser/lexer_extensions/boolean_lexer_extension.dart';
+import 'package:json_parser/lexer_extensions/string_lexer_extension.dart';
 import 'package:json_parser/parser_extensions/boolean_parser_extension.dart';
+import 'package:json_parser/parser_extensions/string_parser_extension.dart';
 
 import 'core/lexer/lexer.dart';
 import 'core/parser/parser.dart';
@@ -11,11 +13,13 @@ final _lexerExtensions = [
   DelimiterLexerExtension(),
   NumberLexerExtension(),
   BooleanLexerExtension(),
+  StringLexerExtension(),
 ];
 
 final _parserExtensions = [
   NumberParserExtension(),
   BooleanParserExtension(),
+  StringParserExtension(),
 ];
 
 final _lexer = Lexer(_lexerExtensions);
