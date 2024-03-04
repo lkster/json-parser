@@ -17,14 +17,18 @@ class Lexer {
   }
 
   Token _next(Scanner scanner) {
+    scanner.omitWhitespace();
+
     for (final extension in extensions) {
       final token = extension.lex(scanner);
+
+      scanner.omitWhitespace();
 
       if (token != null) {
         return token;
       }
     }
 
-    throw 'unexpected char ${String.fromCharCode(scanner.peekChar() ?? 0)}';
+    throw 'unexpected char ${String.fromCharCode(scanner.peekChar() ?? 0)} (0x${scanner.peekChar()?.toRadixString(16)})';
   }
 }

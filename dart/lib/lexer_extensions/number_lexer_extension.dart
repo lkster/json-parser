@@ -21,7 +21,6 @@ final class NumberLexerExtension extends LexerExtension {
   Token? lex(Scanner scanner) {
     String value = '';
 
-    scanner.omitWhitespace();
 
     while (scanner.peekChar().inRange(CharCode.num0.code, CharCode.num9.code)) {
       value += String.fromCharCode(scanner.readChar());

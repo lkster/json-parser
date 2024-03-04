@@ -14,6 +14,6 @@ void main() {
   test('should throw if char is not handled by any of extensions', () {
     var lexer = Lexer([NumberLexerExtension()]).lex('.').iterator;
 
-    expect(() => (lexer..moveNext()).current, throwsA('unexpected char .'));
+    expect(() => (lexer..moveNext()).current, throwsA('unexpected char . (0x2e)'));
   });
 }
