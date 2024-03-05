@@ -1,21 +1,21 @@
 import 'package:json_parser/core/lexer/lexer.dart';
 import 'package:json_parser/core/parser/next_parser_extension.dart';
-import 'package:json_parser/lexer_extensions/boolean_lexer_extension.dart';
+import 'package:json_parser/lexer_extensions/literal_lexer_extension.dart';
 import 'package:json_parser/lexer_extensions/delimiter_lexer_extension.dart';
-import 'package:json_parser/parser_extensions/boolean_parser_extension.dart';
+import 'package:json_parser/parser_extensions/literal_parser_extension.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final lexer = Lexer([BooleanLexerExtension(), DelimiterLexerExtension()]);
+  final lexer = Lexer([LiteralLexerExtension(), DelimiterLexerExtension()]);
   final next = NextParserExtension(onNext: (index, next) => 0);
 
   test('should return boolean if actual token represents boolean', () {
-    final trueValue = BooleanParserExtension().parse(
+    final trueValue = LiteralParserExtension().parse(
       lexer.lex('true').iterator..moveNext(),
       next,
     );
 
-    final falseValue = BooleanParserExtension().parse(
+    final falseValue = LiteralParserExtension().parse(
       lexer.lex('  \nfalse').iterator..moveNext(),
       next,
     );
@@ -30,9 +30,9 @@ void main() {
 
     iterator.moveNext();
 
-    BooleanParserExtension().parse(iterator, next);
+    LiteralParserExtension().parse(iterator, next);
 
-    expect(iterator.current, BooleanToken('false'));
+    expect(iterator.current, LiteralToken('false'));
   });
 
   test('should call next func if actual token is not supported', () {
@@ -47,7 +47,7 @@ void main() {
 
     iterator.moveNext();
 
-    BooleanParserExtension().parse(iterator, next);
+    LiteralParserExtension().parse(iterator, next);
 
     expect(nextCalled, true);
   });
