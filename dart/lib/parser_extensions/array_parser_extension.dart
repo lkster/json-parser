@@ -42,5 +42,4 @@ class ArrayParserExtension implements ParserExtension {
 
     return items;
   }
-
 }
