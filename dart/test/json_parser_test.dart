@@ -31,6 +31,34 @@ void main() {
         false,
       ],
     );
-    expect(parseJson('[[true, [false]]]'), [[true, [false]]]);
+    expect(parseJson('[[true, [false]]]'), [
+      [
+        true,
+        [false]
+      ]
+    ]);
+  });
+
+  test('should properly parse objects', () {
+    expect(parseJson('{}'), {});
+    expect(
+      parseJson('{ "key1": "some string", "num": 23.21, "bool": false }'),
+      {
+        'key1': 'some string',
+        'num': 23.21,
+        'bool': false,
+      },
+    );
+    expect(
+      parseJson('{ "key1": { "key2": { "bool": false }, "key3": 22 } }'),
+      {
+        'key1': {
+          'key2': {
+            'bool': false,
+          },
+          'key3': 22,
+        },
+      },
+    );
   });
 }

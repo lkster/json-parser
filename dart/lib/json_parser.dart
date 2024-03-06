@@ -2,6 +2,7 @@ import 'package:json_parser/lexer_extensions/literal_lexer_extension.dart';
 import 'package:json_parser/lexer_extensions/string_lexer_extension.dart';
 import 'package:json_parser/parser_extensions/array_parser_extension.dart';
 import 'package:json_parser/parser_extensions/literal_parser_extension.dart';
+import 'package:json_parser/parser_extensions/object_parser_extension.dart';
 import 'package:json_parser/parser_extensions/string_parser_extension.dart';
 
 import 'core/lexer/lexer.dart';
@@ -22,6 +23,7 @@ final _parserExtensions = [
   LiteralParserExtension(),
   StringParserExtension(),
   ArrayParserExtension(),
+  ObjectParserExtension(),
 ];
 
 final _lexer = Lexer(_lexerExtensions);
