@@ -9,7 +9,7 @@ final class Parser {
 
   Parser(this.lexer, this.extensions);
 
-  Object parse(String source) {
+  dynamic parse(String source) {
     final iterator = lexer.lex(source).iterator;
 
     iterator.moveNext();

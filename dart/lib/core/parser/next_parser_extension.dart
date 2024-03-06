@@ -21,15 +21,15 @@
 final class NextParserExtension {
   final int index;
 
-  final Object Function(int index, NextParserExtension next) onNext;
+  final dynamic Function(int index, NextParserExtension next) onNext;
 
   NextParserExtension({this.index = 0, required this.onNext});
 
-  Object call() {
+  dynamic call() {
     return onNext(index, NextParserExtension(index: index + 1, onNext: onNext));
   }
 
-  Object startOver() {
+  dynamic startOver() {
     return onNext(0, NextParserExtension(index: 1, onNext: onNext));
   }
 }

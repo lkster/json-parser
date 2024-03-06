@@ -5,7 +5,7 @@ import 'package:json_parser/lexer_extensions/literal_lexer_extension.dart';
 
 final class LiteralParserExtension implements ParserExtension {
   @override
-  Object parse(Iterator<Token?> lexer, NextParserExtension next) {
+  dynamic parse(Iterator<Token?> lexer, NextParserExtension next) {
     if (lexer.current is! LiteralToken) {
       return next();
     }

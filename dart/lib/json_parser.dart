@@ -25,4 +25,4 @@ final _parserExtensions = [
 final _lexer = Lexer(_lexerExtensions);
 final _parser = Parser(_lexer, _parserExtensions);
 
-Object parseJson(String source) => _parser.parse(source);
+dynamic parseJson(String source) => _parser.parse(source);
