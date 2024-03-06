@@ -26,16 +26,17 @@ final class NumberLiteralToken extends Token {
 final class NumberLexerExtension implements LexerExtension {
   @override
   Token? lex(Scanner scanner) {
-    String value = _lexDigits(scanner);
+    String value = _lexSymbol(scanner) + _lexDigits(scanner);
 
     if (value.isEmpty) {
       return null;
     }
 
-    if (scanner.peekChar() == $dot && _isDigit(scanner.peekChar(1))) {
-      scanner.readChar();
-      value += '.${_lexDigits(scanner)}';
+    if (value == '-') {
+      throw 'expected digit after minus';
     }
+
+    value += _lexDecimals(scanner) + _lexExponent(scanner);
 
     return NumberLiteralToken(value);
   }
@@ -45,6 +46,48 @@ final class NumberLexerExtension implements LexerExtension {
 
     while (_isDigit(scanner.peekChar())) {
       value += String.fromCharCode(scanner.readChar());
+    }
+
+    return value;
+  }
+
+  /// I guess redundant plus is not supported by JSON? Unless it's exponent but for simplicity let's support that for
+  /// now (this is also used when lexing exponent)
+  String _lexSymbol(Scanner scanner) {
+    if (![$plus, $minus].contains(scanner.peekChar())) {
+      return '';
+    }
+
+    return String.fromCharCode(scanner.readChar());
+  }
+
+  String _lexDecimals(Scanner scanner) {
+    if (scanner.peekChar() != $dot) {
+      return '';
+    }
+
+    scanner.readChar();
+
+    final value = '.${_lexDigits(scanner)}';
+
+    if (value.endsWith('.')) {
+      throw 'expected digit after decimal point';
+    }
+
+    return value;
+  }
+
+  String _lexExponent(Scanner scanner) {
+    if (![$upperE, $lowerE].contains(scanner.peekChar())) {
+      return '';
+    }
+
+    scanner.readChar();
+
+    var value = 'e${_lexSymbol(scanner)}${_lexDigits(scanner)}';
+
+    if (RegExp(r'[eE+-]$').hasMatch(value)) {
+      throw 'expected digit after exponent';
     }
 
     return value;
