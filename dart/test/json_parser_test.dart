@@ -20,4 +20,17 @@ void main() {
     expect(parseJson('"some string"'), 'some string');
     expect(parseJson('"some \\n \\" \\t\\tstring"'), 'some \n " \t\tstring');
   });
+
+  test('should properly parse arrays', () {
+    expect(parseJson('[]'), []);
+    expect(
+      parseJson('["some string", 23.21, false]'),
+      [
+        'some string',
+        23.21,
+        false,
+      ],
+    );
+    expect(parseJson('[[true, [false]]]'), [[true, [false]]]);
+  });
 }
