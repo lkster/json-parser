@@ -24,6 +24,16 @@ void main() {
     expect(falseValue, false);
   });
 
+  test('should return null if actual token represents null', () {
+    expect(
+      LiteralParserExtension().parse(
+        lexer.lex('null').iterator..moveNext(),
+        next,
+      ),
+      null,
+    );
+  });
+
   test('should consume token if handled', () {
     final iterator = lexer.lex('  true false').iterator;
     final next = NextParserExtension(onNext: (index, next) => 0);
@@ -50,5 +60,15 @@ void main() {
     LiteralParserExtension().parse(iterator, next);
 
     expect(nextCalled, true);
+  });
+
+  test("should throw if LiteralToken's value is not supported", () {
+    expect(
+      () => LiteralParserExtension().parse(
+        lexer.lex('asdf').iterator..moveNext(),
+        next,
+      ),
+      throwsA('unexpected char a (0x61)'),
+    );
   });
 }

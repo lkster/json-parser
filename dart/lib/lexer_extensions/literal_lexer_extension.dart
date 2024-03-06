@@ -32,6 +32,10 @@ final class LiteralLexerExtension implements LexerExtension {
       return LiteralToken('false');
     }
 
+    if (scanner.expectString('null')) {
+      return LiteralToken('null');
+    }
+
     return null;
   }
 }

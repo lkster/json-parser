@@ -14,6 +14,11 @@ final class LiteralParserExtension implements ParserExtension {
 
     lexer.moveNext();
 
-    return token.value == 'true' ? true : false;
+    return switch (token.value) {
+      'true' || 'false' => bool.parse(token.value),
+      'null' => null,
+      // probably would never happen because of strict LiteralLexerExtension
+      Object() => throw 'unexpected token ${token.value}',
+    };
   }
 }
